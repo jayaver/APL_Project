@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="Stylesheet"
+        type="text/css" />
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+    </head>
+    <body>     
+        <form id="myform" action="/thankyou" method="POST">     
+            <!---Navbar-->
+            <header>
+                <div class="container-fluid bg-primary mt-0 pt-1 pb-1 pl-5 text-white">
+                    <div class="row">
+                        <div class="col-sm-2 ml-0 pl-0 pr-0 mr-0">
+                            <img src="logo.jpg" alt="logo">
+                        </div>
+                        <div class="col-sm-6 pl-5 ml-0 pt-2 ">
+                            <h4 text-white><b>Transport Enquiry Request</b></h4>
+                        </div>
+                    </div>
+                </div>
+            </header>
+    
+            <div class="container-fluid bg-white">
+           
+            <!---Product (Data will flow from table)--->
+                <DIV id="product">
+                    <div class="form-group row">
+                        <label for="inputProduct" class="col-sm-2 col-form-label">Product's Type</label>
+                        <div class="col-sm-4">
+                            <select class="custom-select" name="inputProduct" id="inputProduct" placeholder="Select the Product" required></select> 
+                        </div> 
+                    </div>
+             <!---Transport Equipment (Dropdown Menu)--->
+                    <div class="form-group row">
+                        <label for="transportEquipment" class="col-sm-2 col-form-label">Transport Equipment</label>
+                        <div class="col-sm-4">
+                            <select class="custom-select" name="transportEquipment" id="transportEquipment"></select>
+                        </div>
+                    </div>
+                </DIV>
+            <!---Dangerous Goods (Data will be based on product type, validation require in node js)--->
+                <div class="form-group row">
+                    <label for="inputDanger" class="col-sm-2 col-form-label">Dangerous Goods ?</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" name ="inputDanger" id="inputDanger" placeholder="Yes/No-Based on the Product" readonly="true"> 
+                    </div>
+                </div>
+           
+            <!---Delivery Term (Data will flow from table)--->
+                <div class="form-group row">
+                    <label for="dlyTerm" class="col-sm-2 col-form-label">Delivery Term</label>
+                    <div class="col-sm-4">
+                        <select class="custom-select" name="dlyTerm" id="dlyTerm" onchange="inactiveField()">
+                            <option selected>Select...</option>
+                            <option value="CIF/CFR">CIF/CFR - Specified Port of Destination</option>
+                            <option value="DAP/DDP">DAP/DDP - Specified Door Destination</option>
+                        </select> 
+                    </div>
+                </div>
+            <!---Place of Loading (Data will flow from table)--->
+                <div class="form-group row">
+                    <label for="inputPlace" class="col-sm-2 col-form-label">Place of Loading</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" name ="loadplace" id="loadplace" placeholder="Value- Based on product" readonly="true">
+                    </div> 
+                </div>
+            <!---Destination area/Country (Data will flow from table)--->
+                <div class="form-group row">
+                    <label for="inputCountry" class="col-sm-2 col-form-label">Destination Area/Country</label>
+                    <div class="col-sm-4">
+                        <select class="custom-select" name ="inputCountry" id="inputCountry" placeholder="Select"></select> 
+                    </div> 
+                </div>
+            <!---Destination Port (Data will flow from table)--->
+                <div class="form-group row">
+                    <label for="inputPort" class="col-sm-2 col-form-label">Destination Port</label>
+                    <div class="col-sm-4">
+                        <select class="custom-select" name = "inputPort" id="inputPort" placeholder="Select"></select> 
+                    <!---Validation require from Javascript--->
+                        <textarea class="form-control" rows="1" name="freeText" id="freeText" placeholder="Free text, Specify City"></textarea>
+                        <textarea class="form-control" rows="1" name="freeText1" id="freeText1" placeholder="Free text, Specify State and Zip Code"></textarea>
+                    </div>  
+                </div>
+            <!---Quantity (Input - validation number)--->
+                <div class="form-group row">
+                    <label for="inputQty" class="col-sm-2 col-form-label">Quantity per Year (MT)</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" name ="inputQty" id="inputQty" type="text" placeholder="Input in Number" onblur="numberCheck()"></textarea>  
+                    </div>  
+                </div>
+            <!---Max payload(Data will flow from table based on product & Transport Equipment)--->
+                <div class="form-group row">
+                    <label for="maxPayload" class="col-sm-2 col-form-label">Max payload (in MT) per container</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" name="maxPayload" id="maxPayload" readonly="true">  
+                    </div>  
+                </div>
+            <!---Free Days (Data will flow from table)--->
+                <div class="form-group row">
+                    <label for="freeDays" class="col-sm-2 col-form-label">Standard free time at destination</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" name ="freeDays" id="freeDays" readonly="true">
+                    </div>  
+                </div>
+            <!---Additional information (textarea)--->
+                <div class="form-group row">
+                    <label for="addInfo" class="col-sm-2 col-form-label">Additional Information</label>
+                    <div class="col-sm-4">
+                        <textarea class="form-control" rows="5" id="addInfo" name="addInfo" maxlength="500" placeholder="Free Text..."></textarea>  
+                    </div>  
+                </div>
+            <!---E-mail id  (E-mail id validation)--->
+                <div class="form-group row">
+                    <label for="emailId" class="col-sm-2 col-form-label">Your E-mail Id</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" name="email" id="emailId" placeholder="E-mail Id" onblur="validateEmail()">
+                    </div>  
+                </div>
+            <!---Offer For and Calendar--->
+                <div class ="form-group row">
+                    <label for ="offeFor" class="col-sm-2 col-form-label">Offer For</label>
+                    <div class="col-sm-3">
+                        <input type="radio" name="offerFor" id="offerFor" value="General Estimation">
+                        <label for="offerFor">General Estimation</label>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="radio" name="offerFor" id="offerFor1" value="Current Load" onclick="offerCheck()">
+                        <label for="offerFor1">Current Load</label>
+                        <div id="date1" style="visibility:hidden">
+                            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" readonly="true"/>
+                        </div>
+                    </div>
+                </div>
+
+         <!---Submit button--->
+                <button class="btn btn-primary" id="submit" onclick="return validateForm()" >Submit</button>
+            </div>
+        </form>
+        <script src="appcheck.js"></script>       
+        <script src="app.js"></script>
+    </body>
+</html>
