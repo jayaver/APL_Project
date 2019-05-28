@@ -117,7 +117,7 @@ try {
 //Excel Creation
 
 app.post('/thankyou', (req,res) => {
-  console.log(req.body)
+ // console.log(req.body)
   const product=req.body.inputProduct
   const trans=req.body.transportEquipment
   const danger=req.body.inputDanger
@@ -151,14 +151,14 @@ app.post('/thankyou', (req,res) => {
    });
   var writeStream = fs.createWriteStream("transport_enquiry.xls");
   //Excel Header
-  var header="Quantity/ Max Payload/ Free Days/ Info/ Offer Type/ Validity Date "+"\t"+"Product Description"+"\t"+"Transport Equipment"+"\t"+
-  "Dangerous Goods"+"\t"+"Loading Place"+"\t"+"Delivery Term"+"\t"+
-  "Port"+"\t"+"State/Zip Code"+"\t"+"Country"+"\t"
-  +"Email_Id"+"\n";
+  var header="Quantity/ Max Payload/ Info/ Offer Type/ Validity Date "+"\t"+"\t"+
+  +"Loading Place"+"\t"+"Country"+"\t"+"Port"+"\t"+"State/Zip Code"+"\t"+"Transport Equipment"+"\t"+
+  "Dangerous Goods"+"\t"+"Product Description"+"\t"+"Delivery Term"+"\t"+"Free Days"
+  +"\t"+"Email_Id"+"\n";
   //Excel Row
-  var row = qty+"/ "+payload+"/ "+fdays+"/ "+info+"/ "+offer+"/ "+sdate+
-  "\t"+product+"\t"+trans+"\t"+danger+"\t"+loadplace+"\t"+dly+"\t"+port+ftext+
-  "\t"+ftext1+"\t"+country+"\t"+email+"\n";
+  var row = qty+" MT/ year"+"/ "+payload+" MT/container"+"/ "+info+"/ "+offer+"/ "+sdate+
+  "\t"+"\t"+loadplace+"\t"+country+"\t"+port+ftext+
+  "\t"+ftext1+"\t"+trans+"\t"+danger+"\t"+product+"\t"+dly+"\t"+fdays+"\t"+email+"\n";
   //Writing in excel
   writeStream.write(header);
   writeStream.write(row);
@@ -177,6 +177,7 @@ let transporter=nodemailer.createTransport({
 let mailOptions={
     from:'perstorptransport',
     to:email,
+    cc:'Per.Derwik@perstorp.com',
     subject:'Perstorp Transport Enquiry'+'( '+product+' / '+danger+' / '+trans+' )',
     text: 'Thank you for submitting enquiry.'+'\nYour enquiry will be processed immediately during office hours.' + '\n' + 
     '\nProduct Description :'  + '\t' + product +
@@ -185,7 +186,8 @@ let mailOptions={
     '\nDelivery term :' + '\t' + dly+
     '\nLoading Place :' + '\t'+loadplace+
     '\nCountry :' + '\t'+country+
-    '\nPort :'+'\t'+port+
+    '\nPort :'+'\t'+port+ftext+
+    '\nState/ Zip Code :'+'\t'+ftext1+
     '\nQuantity :'+'\t' + qty+
     '\nMax Pay Load :' + '\t' + payload +
     '\nAdditional Information :'+ '\t' + info +
@@ -194,14 +196,14 @@ let mailOptions={
     '\nDate :' + '\t' + sdate+
     '\nEmail-id :' + '\t' + email+
     '\n'+
-    '\nYour will be dealt with by'+
+    '\nYour enquiry will be handled by'+
     '\n'+
     '\nPer Derwik' +
     '\nSE-284 80 Perstorp Sweden'+
     '\nPhone +46 435 7886 92' +
     '\nMobile +46 708 279261' +
     '\nper.derwik@perstorp.com' +
-    '\nwww.perstorp.com',
+    '\nperstorp.com',
 
    attachments:[
        {
@@ -224,6 +226,7 @@ transporter.sendMail(mailOptions, function(err,data){
 
  
   res.end()
+ // connection.end()
   
 })
 

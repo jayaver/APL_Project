@@ -70,7 +70,7 @@ function validateEmail() {
     j == null || j == '',
     k == null || k == '')
   ) {
-    alert('Please Fill All Required Field');
+    alert('Please fill mandatory fields');
     return false;
   }
 }

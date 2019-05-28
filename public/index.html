@@ -32,16 +32,18 @@
             <div class="container-fluid bg-white">
            
             <!---Product (Data will flow from table)--->
+
                 <DIV id="product">
+                    <p>Asterisk Mark(*)fields are mandatory</p>
                     <div class="form-group row">
-                        <label for="inputProduct" class="col-sm-2 col-form-label">Product's Type</label>
+                        <label for="inputProduct" class="col-sm-2 col-form-label">Product's <font color="red">*</font></label>
                         <div class="col-sm-4">
                             <select class="custom-select" name="inputProduct" id="inputProduct" placeholder="Select the Product" required></select> 
                         </div> 
                     </div>
              <!---Transport Equipment (Dropdown Menu)--->
                     <div class="form-group row">
-                        <label for="transportEquipment" class="col-sm-2 col-form-label">Transport Equipment</label>
+                        <label for="transportEquipment" class="col-sm-2 col-form-label">Transport Equipment<font color="red">*</font></label>
                         <div class="col-sm-4">
                             <select class="custom-select" name="transportEquipment" id="transportEquipment"></select>
                         </div>
@@ -49,7 +51,7 @@
                 </DIV>
             <!---Dangerous Goods (Data will be based on product type, validation require in node js)--->
                 <div class="form-group row">
-                    <label for="inputDanger" class="col-sm-2 col-form-label">Dangerous Goods ?</label>
+                    <label for="inputDanger" class="col-sm-2 col-form-label">Dangerous Goods ?<font color="red">*</font></label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text" name ="inputDanger" id="inputDanger" placeholder="Yes/No-Based on the Product" readonly="true"> 
                     </div>
@@ -57,7 +59,7 @@
            
             <!---Delivery Term (Data will flow from table)--->
                 <div class="form-group row">
-                    <label for="dlyTerm" class="col-sm-2 col-form-label">Delivery Term</label>
+                    <label for="dlyTerm" class="col-sm-2 col-form-label">Delivery Term<font color="red">*</font></label>
                     <div class="col-sm-4">
                         <select class="custom-select" name="dlyTerm" id="dlyTerm" onchange="inactiveField()">
                             <option selected>Select...</option>
@@ -68,21 +70,21 @@
                 </div>
             <!---Place of Loading (Data will flow from table)--->
                 <div class="form-group row">
-                    <label for="inputPlace" class="col-sm-2 col-form-label">Place of Loading</label>
+                    <label for="inputPlace" class="col-sm-2 col-form-label">Place of Loading<font color="red">*</font></label>
                     <div class="col-sm-4">
                         <input class="form-control" name ="loadplace" id="loadplace" placeholder="Value- Based on product" readonly="true">
                     </div> 
                 </div>
             <!---Destination area/Country (Data will flow from table)--->
                 <div class="form-group row">
-                    <label for="inputCountry" class="col-sm-2 col-form-label">Destination Area/Country</label>
+                    <label for="inputCountry" class="col-sm-2 col-form-label">Destination Area/Country<font color="red">*</font></label>
                     <div class="col-sm-4">
                         <select class="custom-select" name ="inputCountry" id="inputCountry" placeholder="Select"></select> 
                     </div> 
                 </div>
             <!---Destination Port (Data will flow from table)--->
                 <div class="form-group row">
-                    <label for="inputPort" class="col-sm-2 col-form-label">Destination Port</label>
+                    <label for="inputPort" class="col-sm-2 col-form-label">Destination Port<font color="red">*</font></label>
                     <div class="col-sm-4">
                         <select class="custom-select" name = "inputPort" id="inputPort" placeholder="Select"></select> 
                     <!---Validation require from Javascript--->
@@ -92,21 +94,21 @@
                 </div>
             <!---Quantity (Input - validation number)--->
                 <div class="form-group row">
-                    <label for="inputQty" class="col-sm-2 col-form-label">Quantity per Year (MT)</label>
+                    <label for="inputQty" class="col-sm-2 col-form-label">Quantity per Year (MT)<font color="red">*</font></label>
                     <div class="col-sm-4">
                         <input class="form-control" name ="inputQty" id="inputQty" type="text" placeholder="Input in Number" onblur="numberCheck()"></textarea>  
                     </div>  
                 </div>
             <!---Max payload(Data will flow from table based on product & Transport Equipment)--->
                 <div class="form-group row">
-                    <label for="maxPayload" class="col-sm-2 col-form-label">Max payload (in MT) per container</label>
+                    <label for="maxPayload" class="col-sm-2 col-form-label">Max payload (in MT) per container<font color="red">*</font></label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text" name="maxPayload" id="maxPayload" readonly="true">  
                     </div>  
                 </div>
             <!---Free Days (Data will flow from table)--->
                 <div class="form-group row">
-                    <label for="freeDays" class="col-sm-2 col-form-label">Standard free time at destination</label>
+                    <label for="freeDays" class="col-sm-2 col-form-label">Standard free time at destination<font color="red">*</font></label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text" name ="freeDays" id="freeDays" readonly="true">
                     </div>  
@@ -120,14 +122,14 @@
                 </div>
             <!---E-mail id  (E-mail id validation)--->
                 <div class="form-group row">
-                    <label for="emailId" class="col-sm-2 col-form-label">Your E-mail Id</label>
+                    <label for="emailId" class="col-sm-2 col-form-label">Your E-mail Id<font color="red">*</font></label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text" name="email" id="emailId" placeholder="E-mail Id" onblur="validateEmail()">
                     </div>  
                 </div>
             <!---Offer For and Calendar--->
                 <div class ="form-group row">
-                    <label for ="offeFor" class="col-sm-2 col-form-label">Offer For</label>
+                    <label for ="offeFor" class="col-sm-2 col-form-label">Offer For<font color="red">*</font></label>
                     <div class="col-sm-3">
                         <input type="radio" name="offerFor" id="offerFor" value="General Estimation">
                         <label for="offerFor">General Estimation</label>
